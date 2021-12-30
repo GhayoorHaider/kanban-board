@@ -1,0 +1,69 @@
+<div class="board">
+    <section class="mb-5">
+        <div class="d-flex" *ngIf="!isEdit; else editBoardForm">
+            <div class="flex-fill">
+                <button class="btn btn-danger m-3" (click)="remove()">
+                    Delete board <i class="fa fa-trash"></i>
+                </button>
+                <button class="btn btn-primary m-3" (click)="toggleEdit()">
+                    Edit board <i class="fa fa-edit"></i>
+                </button>
+            </div>
+
+            <h2 class="flex-fill m-3" (dblclick)="toggleEdit()">{{ board.name }}</h2>
+
+            <div class="flex-fill"></div>
+        </div>
+        <ng-template #editBoardForm>
+            <form (submit)="editBoard(boardTitle.value)" class="d-flex">
+                <div class="flex-fill">
+                    <button class="btn btn-success m-3" type="submit">
+                        Save <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-danger m-3" (click)="toggleEdit()">
+                        Cancel <i class="fa fa-remove"></i>
+                    </button>
+                </div>
+    
+                <div class="flex-fill">
+                    <input type="text" class="form-control w-50 mt-2" [value]="board.name" #boardTitle>
+                </div>
+    
+                <div class="flex-fill"></div>
+            </form>
+        </ng-template>
+    </section>
+
+    <section>
+        <div
+            cdkDropList
+            [cdkDropListData]="taskLists"
+            (cdkDropListDropped)="onTaskListDrop($event)"
+            class="task-list-grid"
+            cdkDropListOrientation="horizontal">
+            <div class="task-list-item">
+                <i *ngIf="!isFormOn; else taskListForm" class="fa fa-plus" role="button" (click)="showForm()"></i>
+        
+                <ng-template #taskListForm>
+                    <app-task-list-form [boardId]="boardId" (change)="updateTaskLists($event)" (cancel)="closeForm($event)"></app-task-list-form>
+                </ng-template>
+            </div>
+
+        
+            <div
+                class="task-list-item" 
+                *ngFor="let taskList of taskLists" 
+                cdkDrag 
+                cdkDragLockAxis="x">
+                <app-task-list 
+                    [title]="taskList.name"
+                    [boardId]="boardId"
+                    [taskListId]="taskList.id"
+                    [taskListsCdkIds]="taskListsCdkIds"
+                    (shouldUpdate)="reloadTaskLists()">
+                    <div class="custom-handle" cdkDragHandle></div>
+                </app-task-list>
+            </div>
+        </div>
+    </section>
+<div>

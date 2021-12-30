@@ -1,0 +1,12 @@
+.task-list {
+    background-color: #F5F5F5;
+    height: 100%;
+    overflow: hidden;
+    scrollbar-width: thin;
+}
+
+.task-header {
+    height: 3rem;
+    width: 25em;
+    margin-bottom: 1rem;
+}
