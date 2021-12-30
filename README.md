@@ -3,6 +3,9 @@
 ### Technology used
 Angular - Javascript
 
+## Video Demo Url
+https://www.loom.com/share/0382620e56474504b91f93eed6a39679
+
 ## Introduction
 Kanban Board is a task management board just like JIRA, Trello, Notion etc.
 It lets you create multiple boards and then multiple task lists, You can have your own stream of lists based on your needs. Finally it allows you to create issues / bugs / features and then you can drag these to different tasks lists.
